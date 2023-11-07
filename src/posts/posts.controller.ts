@@ -11,27 +11,48 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
-interface Post {
+interface PostModel {
+  id: number;
   author: string;
   title: string;
   content: string;
   likeCount: number;
   commentCount: number;
 }
+let posts: PostModel[] = [
+  {
+    id: 1,
+    author: 'John',
+    title: 'My first post',
+    content: 'This is my first post',
+    likeCount: 0,
+    commentCount: 0,
+  },
+  {
+    id: 2,
+    author: 'david',
+    title: 'My second post',
+    content: 'This is my second post',
+    likeCount: 0,
+    commentCount: 0,
+  },
+  {
+    id: 3,
+    author: 'mary',
+    title: 'My third post',
+    content: 'This is my third post',
+    likeCount: 0,
+    commentCount: 0,
+  },
+];
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Get()
-  getPost(): Post {
-    return {
-      author: 'John',
-      title: 'My first post',
-      content: 'This is my first post',
-      likeCount: 0,
-      commentCount: 0,
-    };
+  getPost(): PostModel[] {
+    return posts;
   }
 
   @Post()
