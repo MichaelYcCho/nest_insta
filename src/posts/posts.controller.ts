@@ -55,6 +55,28 @@ export class PostsController {
     return posts;
   }
 
+  @Get(':id')
+  getPostById(@Param('id') id: string): PostModel {
+    return posts.find((post) => post.id === +id);
+  }
+
+  @Post()
+  postPosts(
+    @Body('author') author: string,
+    @Body('title') title: string,
+    @Body('content') content: string,
+  ) {
+    const post: PostModel = {
+      id: posts[posts.length - 1].id + 1,
+      author,
+      title,
+      likeCount: 0,
+      commentCount: 0,
+    };
+
+    posts = [...posts];
+    return post;
+  }
   @Post()
   create(@Body() createPostDto: CreatePostDto) {
     return this.postsService.create(createPostDto);
